@@ -1,0 +1,134 @@
+﻿@using MudBlazor
+@inherits LayoutComponentBase
+
+<MudThemeProvider @ref="@_mudThemeProvider" Theme="theme" IsDarkMode="false" />
+@*<MudThemeProvider @ref="@_mudThemeProvider" Theme="theme" @bind-IsDarkMode="CustomDark" />*@
+<MudDialogProvider />
+<MudSnackbarProvider />
+<MudLayout>
+    <MudAppBar Fixed="true">
+@*        <MudHidden Breakpoint="Breakpoint.MdAndUp" Invert="false">
+            <MudIconButton Icon="@Icons.Material.Outlined.Menu"
+                           Color="Color.Inherit"
+                           Edge="Edge.Start"
+                           OnClick="ToggleDrawer" />
+            <MudSpacer />
+        </MudHidden>*@
+        @*<MudText>Lager App</MudText>*@
+@*         <MudSpacer />
+        <MudItem Style="height:100%">
+            <MudImage ObjectFit="ObjectFit.None" Src="img/logo.png" />
+        </MudItem> *@
+
+        <MudSpacer />
+        <MudIconButton Icon="@Icons.Material.Outlined.Settings"
+                       Color="Color.Inherit"
+                       Edge="Edge.Start"
+                       OnClick="(() => {CustomDark = !CustomDark;})" />
+    </MudAppBar>
+    <MudDrawer @bind-Open="@drawerShown"
+               ClipMode="DrawerClipMode.Always"
+               DisableOverlay="false">
+        <NaviView />
+    </MudDrawer>
+    <MudMainContent Style="height:100%">
+
+
+        @Body
+
+    </MudMainContent>
+</MudLayout>
+
+@code {
+    private bool customDark;
+
+    [Parameter]
+    public bool CustomDark
+    {
+        get => customDark;
+        set
+        {
+            if (customDark == value) return;
+            customDark = value;
+            CustomDarkChanged.InvokeAsync(customDark);
+        }
+    }
+
+    private bool darkThemeSetting;
+
+    [Parameter]
+    public bool DarkThemeSetting
+    {
+        get
+        {
+            return darkThemeSetting;
+        }
+        set
+        {
+            if (darkThemeSetting == value) return;
+            darkThemeSetting = value;
+            DarkThemeSettingChanged.InvokeAsync(darkThemeSetting);
+        }
+    }
+
+    private MudTheme theme = new()
+        {
+            Palette = new PaletteLight
+            {
+                Background = "#f5f5f5",
+                Primary = "#2E7D32",
+                Surface = "#ACCA5A",
+                Info = "#5454ceff",
+                //InfoContrastText = "#00000000",
+                Tertiary = "#f2f8fb",
+                Secondary = "#ACCA5A",
+                AppbarBackground = "#2E7D32",
+                Divider = "#ACCA5A",
+                DrawerBackground = "#e4e8ec",
+                DrawerText = "#2E7D32",
+                DrawerIcon = "#2E7D32",
+            },
+            //PaletteDark = new PaletteDark
+            //{
+            //    Background = "#222222",
+            //    Primary = "#8787f7ff",
+            //    Surface = "#222222",
+            //    Info = "#eeeeffff",
+            //    InfoContrastText = "#000000ff",
+            //    Tertiary = "#333377",
+            //    Secondary = "#33337766",
+            //},
+        };
+
+
+    private MudThemeProvider _mudThemeProvider;
+
+    bool drawerShown = true;
+
+    private void ToggleDrawer()
+    {
+        drawerShown = !drawerShown;
+    }
+
+    [Parameter]
+    public EventCallback<bool> CustomDarkChanged { get; set; }
+    [Parameter]
+    public EventCallback<bool> DarkThemeSettingChanged { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            DarkThemeSetting = await _mudThemeProvider.GetSystemPreference();
+            await _mudThemeProvider.WatchSystemPreference(OnSystemPreferenceChanged);
+            CustomDark = DarkThemeSetting;
+            StateHasChanged();
+        }
+    }
+    private async Task OnSystemPreferenceChanged(bool newValue)
+    {
+        DarkThemeSetting = newValue;
+
+        StateHasChanged();
+    }
+}

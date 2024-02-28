@@ -1,0 +1,37 @@
+﻿@using MudBlazor
+<MudNavMenu Style="height:100%">
+    <div style="display: flex; flex-flow: column; height:100%;">
+        <MudNavLink Href="" Match="NavLinkMatch.All"
+                    Icon="@Icons.Material.Filled.Label"
+        Style="flex: 0 1 auto;">
+            Seite 1
+        </MudNavLink>
+        
+
+        <MudNavLink Href="page2" Match="NavLinkMatch.All"
+                    Icon="@Icons.Material.Filled._360"
+                    Style="flex: 0 1 auto;">
+            Seite 2
+        </MudNavLink>
+        
+
+        <MudNavLink Href="areas" Match="NavLinkMatch.All"
+                    Icon="@Icons.Material.Filled._360"
+                    Style="flex: 0 1 auto;">
+            Lagerplätze
+        </MudNavLink>
+        <MudNavLink Href="overview" Match="NavLinkMatch.All"
+                    Icon="@Icons.Material.Filled._360"
+                    Style="flex: 0 1 auto;">
+            Übersicht
+        </MudNavLink>
+
+        <div style="flex: 1 1 auto;" />
+
+        <MudNavLink Href="info" Match="NavLinkMatch.All"
+                    Icon="@Icons.Material.Filled.Info"
+                    Style="flex: 0 1 auto;">
+            Info
+        </MudNavLink>
+    </div>
+</MudNavMenu>

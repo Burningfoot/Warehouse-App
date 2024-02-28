@@ -1,0 +1,33 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31611.283
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LagerApp", "LagerApp\LagerApp.csproj", "{8193CDAA-4609-4144-BB9F-D1E9637807A8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SqliteDB", "SqliteDB\SqliteDB.csproj", "{169592D9-5216-466F-A549-B5B7B605C041}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8193CDAA-4609-4144-BB9F-D1E9637807A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8193CDAA-4609-4144-BB9F-D1E9637807A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8193CDAA-4609-4144-BB9F-D1E9637807A8}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{8193CDAA-4609-4144-BB9F-D1E9637807A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8193CDAA-4609-4144-BB9F-D1E9637807A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8193CDAA-4609-4144-BB9F-D1E9637807A8}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{169592D9-5216-466F-A549-B5B7B605C041}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{169592D9-5216-466F-A549-B5B7B605C041}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{169592D9-5216-466F-A549-B5B7B605C041}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{169592D9-5216-466F-A549-B5B7B605C041}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A56D991F-8B66-4275-8269-B1E510AC6653}
+		        SolutionGuid = {61F7FB11-1E47-470C-91E2-47F8143E1572}
+	EndGlobalSection
+EndGlobal

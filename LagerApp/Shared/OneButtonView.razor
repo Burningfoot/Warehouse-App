@@ -1,0 +1,19 @@
+﻿@using MudBlazor
+@using ReactiveUI.Blazor;
+@using LagerApp.ViewModels.Pages;
+
+@inherits ReactiveInjectableComponentBase<OneButtonViewModel>
+
+<MudContainer Class="d-flex flex-column flex-grow-1 gap-2 pa-2"
+              Style="height: 100%;">
+    <MudSpacer />
+    <MudButton Class="d-flex flex-none"
+               Size="Size.Large"
+               EndIcon="@Icons.Material.Filled.QrCodeScanner"
+               Variant="Variant.Filled"
+               Color="Color.Primary"
+               OnClick="Scan">
+        Scan
+    </MudButton>
+    <MudSpacer />
+</MudContainer>

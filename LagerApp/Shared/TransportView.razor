@@ -1,0 +1,150 @@
+﻿@using LagerApp.ViewModels.Pages;
+@using MudBlazor;
+@using ReactiveUI.Blazor;
+
+@inherits ReactiveInjectableComponentBase<ItemListViewModel>
+
+<MudContainer Class="d-flex flex-column flex-grow-1 gap-2 pa-2"
+              Style="height: 100%;">
+    <MudButtonGroup Color="Color.Primary"
+                    Variant="Variant.Filled"
+                    Size="Size.Large"
+                    Class="d-flex flex-none">
+        <MudTextField T="string"
+        @bind-Text="CodeArea1"
+                      InputType="InputType.Text"
+                      ReadOnly="true"
+                      Placeholder="Bitte scannen"
+                      Label="1. Lagerplatz"
+                      FullWidth="true"
+                      DisableUnderLine="true"
+                      Class="mx-2" />
+        <MudIconButton Icon="@Icons.Material.Filled.DocumentScanner"
+                       Size="Size.Medium"
+                       Variant="Variant.Text"
+                       OnClick="ScanBarcode1" />
+    </MudButtonGroup>
+    @if (BranchInArea != null)
+    {
+        <MudPaper Class="flex-grow-0 flex-shrink-1 d-flex mud-theme-primary" Style="width:inherit;">
+            <MudGrid Class="ma-0">
+                <MudItem xs="4">
+                    Lieferung
+                </MudItem>
+                <MudItem xs="8">
+                    <MudText>@BranchInArea.Id</MudText>
+                </MudItem>
+                <MudItem xs="4">
+                    Anzahl Pakete
+                </MudItem>
+                <MudItem xs="8">
+                    <MudText>@BranchInArea.Capacity</MudText>
+                </MudItem>
+                <MudItem xs="4">
+                    Mhd
+                </MudItem>
+                <MudItem xs="8">
+                    <MudText>@BranchInArea.ExpiredDate.ToShortDateString()</MudText>
+                </MudItem>
+                @if (ItemOfBranch != null)
+                {
+                    <MudItem xs="4">
+                        Hersteller
+                    </MudItem>
+                    <MudItem xs="8">
+                        @ItemOfBranch.Producer
+                    </MudItem>
+                    <MudItem xs="4">
+                        Prokuktname
+                    </MudItem>
+                    <MudItem xs="8">
+                        @ItemOfBranch.Name
+                    </MudItem>
+
+                    @*                         <MudText>@ItemOfBranch.Description</MudText>
+            <MudText>@ItemOfBranch.Quantity</MudText> *@
+                }
+            </MudGrid>
+        </MudPaper>
+    }
+    <MudButtonGroup Color="Color.Primary"
+                    Variant="Variant.Filled"
+                    Size="Size.Large"
+                    Class="d-flex flex-none">
+        <MudTextField T="string"
+        @bind-Text="@CodeArea2"
+                      InputType="InputType.Text"
+                      ReadOnly="true"
+                      Placeholder="Bitte scannen"
+                      Label="2. Lagerplatz"
+                      FullWidth="true"
+                      DisableUnderLine="true"
+                      Class="mx-2" />
+        <MudIconButton Icon="@Icons.Material.Filled.DocumentScanner"
+                       Size="Size.Large"
+                       Variant="Variant.Text"
+                       OnClick="ScanBarcode2" />
+    </MudButtonGroup>
+    <MudButton Class="d-flex flex-none"
+               Size="Size.Large"
+               EndIcon="@Icons.Material.Filled.QrCodeScanner"
+               Variant="Variant.Filled"
+               Color="Color.Primary"
+               OnClick="ScanQrCode">
+    </MudButton>
+    <MudStack Class="flex-grow-1 flex-shrink-1 d-flex ma-0 pa-0"
+              Row="true"
+              Style="overflow-y:hidden;">
+
+        <MudContainer Style="overflow-y:scroll"
+                      Class="ma-0 pa-0">
+            @if (ItemList != null)
+            {
+                <MudList>
+                    @foreach (var item in ItemList)
+                    {
+                        <MudDivider />
+                        <MudListItem>
+                            <MudText>@item.Id</MudText>
+                            <MudText>@item.Area.Code</MudText>
+                            <MudText>@item.Branch.Id</MudText>
+                        </MudListItem>
+                    }
+                </MudList>
+            }
+        </MudContainer>
+    </MudStack>
+    <MudButtonGroup Color="Color.Primary"
+                    Variant="Variant.Filled"
+                    Size="Size.Small"
+                    VerticalAlign="true"
+                    Class="d-flex flex-none flex-column gap-2 pa-2 mud-theme-secondary">
+        <MudButtonGroup Color="Color.Primary"
+            Variant="Variant.Filled"
+                        Size="Size.Small"
+                        Class="d-flex flex-none">
+            <MudTextField T="int"
+                          InputType="InputType.Number"
+                          ReadOnly="true"
+                          InputMode="InputMode.numeric"
+                          AdornmentIcon="@Icons.Material.Filled.Warehouse"
+                          Adornment="Adornment.Start"
+                          AdornmentColor="Color.Primary"
+                          Margin="Margin.Dense"
+                          DisableUnderLine="true"
+                          Label="Anzahl"
+                          Class="mx-2"/>
+            <MudButton Size="Size.Large">
+                +1
+            </MudButton>
+            <MudButton Size="Size.Large">Alle</MudButton>
+        </MudButtonGroup>
+        <MudButton Variant="Variant.Filled"
+                   Color="Color.Primary"
+                   FullWidth="true"
+                   Size="Size.Large"
+                   Class="d-flex flex-none">
+            OK
+        </MudButton>
+    </MudButtonGroup>
+</MudContainer>
